@@ -6,7 +6,7 @@ API_KEY = "AIzaSyD2FRO2d0yYH8nvbU8J1vxc6qjp6D3I-gw"
 genai.configure(api_key=API_KEY)
 
 # Use the latest stable model
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-2.0-flash')
 
 st.title("🤝 UnitySync: AI Resource Allocation")
 
