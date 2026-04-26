@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # 1. Setup - USE YOUR REAL KEY HERE
-API_KEY = "PASTE_YOUR_ACTUAL_KEY_STARTING_WITH_AIza"
+API_KEY = "AIzaSyD2FRO2d0yYH8nvbU8J1vxc6qjp6D3I-gw"
 genai.configure(api_key=API_KEY)
 
 # Use the latest stable model
