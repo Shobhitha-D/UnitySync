@@ -1,22 +1,25 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Setup Gemini
-genai.configure(api_key="YOUR_API_KEY_HERE")
-model = genai.GenerativeModel('gemini-pro')
+# 1. Setup - USE YOUR REAL KEY HERE
+API_KEY = "PASTE_YOUR_ACTUAL_KEY_STARTING_WITH_AIza"
+genai.configure(api_key=API_KEY)
 
-st.set_page_config(page_title="UnitySync", page_icon="🤝")
+# Use the latest stable model
+model = genai.GenerativeModel('gemini-1.5-flash')
+
 st.title("🤝 UnitySync: AI Resource Allocation")
 
-# Interface
-st.markdown("### Step 1: Input Community Need")
-report = st.text_area("Enter a field report (e.g., 'Block B needs clean water and a plumber')")
+report = st.text_area("Step 1: Input Community Need", "We need a doctor in Sector 5.")
 
 if st.button("Run Smart Match"):
-    if report:
-        # Gemini analyzes the text
-        response = model.generate_content(f"Analyze this report: '{report}'. Tell me the Urgency (1-10) and the primary skill needed. Format as: Urgency: X | Skill: Y")
-        st.info(f"AI Analysis: {response.text}")
-        st.success("Match found! Notifying best-fit volunteer...")
-    else:
-        st.error("Please enter a report first!")
+    if not API_KEY or "YOUR" in API_KEY:
+        st.error("Please update your API Key in the code!")
+    elif report:
+        try:
+            # AI Analysis
+            response = model.generate_content(f"Analyze urgency (1-10) and skill needed for: {report}")
+            st.info(f"AI Analysis: {response.text}")
+            st.success("Matching found! Assigned: Lead Volunteer to the sector.")
+        except Exception as e:
+            st.error(f"AI Error: {e}")
